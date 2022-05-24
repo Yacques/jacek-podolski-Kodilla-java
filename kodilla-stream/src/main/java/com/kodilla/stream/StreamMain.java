@@ -1,47 +1,27 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.beautifier.PoemDecorator;
 
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class StreamMain {
 
-    public static void main(String[] args) {
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        PoemDecorator taskToDo1 = () -> {
-            String text1 = "This is the first decorated text.";
-            System.out.println(text1.toUpperCase());
-        };
+    public static void main(String[] args){
+        Forum theForum = new Forum();
 
-        PoemDecorator taskToDo2 = () -> {
-            String text2 = "This is the second decorated text.";
-            System.out.println("ABC" + " " + text2 + " " + "XYZ");
-        };
+        Map<Integer, ForumUser> theForumUserMap = theForum.getUserList().stream()
+                .filter(forumUser -> Objects.equals(forumUser.getSexOfUser(), "M"))
+                .filter(forumUser -> forumUser.getDateOfBirth().getYear() > 2002)
+                .filter(forumUser -> forumUser.getPostsQuantityOfUser() > 0)
+                .collect(Collectors.toMap(ForumUser::getUniqueIdNumberOfUser, forumUser -> forumUser));
 
-        PoemDecorator taskToDo3 = () -> {
-            String text3 = "This is the third decorated text.";
-            System.out.println(text3.replace('t', 'w'));
-        };
+        theForumUserMap.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
 
-        PoemDecorator taskToDo4 = () -> {
-            String text4 = "This is the fourth decorated text.";
-            System.out.println(text4.replace(" ", ""));
-        };
-
-        PoemDecorator taskToDo5 = () -> {
-            String text5 = "This is the fifth decorated text.";
-            for(int i=0; i < text5.length(); i++){
-                System.out.println(text5.charAt(i) + " ");
-
-            }
-
-        };
-
-        poemBeautifier.beautify(taskToDo1);
-        poemBeautifier.beautify(taskToDo2);
-        poemBeautifier.beautify(taskToDo3);
-        poemBeautifier.beautify(taskToDo4);
-        poemBeautifier.beautify(taskToDo5);
     }
 }
 
