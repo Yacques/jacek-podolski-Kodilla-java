@@ -1,8 +1,6 @@
-package com.kodilla.stream;
+package com.kodilla.stream.forumuser;
 
 
-import com.kodilla.stream.forumuser.Forum;
-import com.kodilla.stream.forumuser.ForumUser;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,7 +11,7 @@ public class StreamMain {
         Forum theForum = new Forum();
 
         Map<Integer, ForumUser> theForumUserMap = theForum.getUserList().stream()
-                .filter(forumUser -> Objects.equals(forumUser.getSexOfUser(), "M"))
+                .filter(forumUser -> Objects.equals(forumUser.getSexOfUser(), 'M'))
                 .filter(forumUser -> forumUser.getDateOfBirth().getYear() > 2002)
                 .filter(forumUser -> forumUser.getPostsQuantityOfUser() > 0)
                 .collect(Collectors.toMap(ForumUser::getUniqueIdNumberOfUser, forumUser -> forumUser));

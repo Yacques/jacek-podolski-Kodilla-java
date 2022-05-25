@@ -12,6 +12,7 @@ public final class ForumUser {
 
     public String getUserName() {
         return userName;
+
     }
 
     public String getRealName() {
